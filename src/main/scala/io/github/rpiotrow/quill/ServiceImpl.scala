@@ -4,7 +4,7 @@ import io.github.rpiotrow.quill.domain.Organization
 
 import scala.concurrent.{ExecutionContext, Future};
 
-class AkkaService(repository: Repository)(implicit private val ec: ExecutionContext) extends BaseService(repository) with Service[Future] {
+class ServiceImpl(repository: Repository)(implicit private val ec: ExecutionContext) extends BaseService(repository) with Service[Future] {
 
   override def getOrganizationsForThingsDynamic: Future[Seq[Organization]] =
     getOrganizationsForThingsDynamicIO.unsafeToFuture()
