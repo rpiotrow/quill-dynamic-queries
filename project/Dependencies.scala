@@ -8,7 +8,6 @@ object Dependencies {
   lazy val quill = Seq(
     "org.tpolecat"             %% "doobie-core"                 % Versions.doobieV,
     "org.tpolecat"             %% "doobie-h2"                   % Versions.doobieV,
-    "org.tpolecat"             %% "doobie-hikari"               % Versions.doobieV,
     "org.tpolecat"             %% "doobie-quill"                % Versions.doobieV
   )
 }

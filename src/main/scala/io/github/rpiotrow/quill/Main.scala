@@ -1,24 +1,20 @@
 package io.github.rpiotrow.quill
 
+import cats.effect.{ExitCode, IO}
+
 import java.util.Date
-import scala.concurrent.ExecutionContext
 
-object Main {
+object Main extends cats.effect.IOApp {
 
-  def main(args: Array[String]): Unit = {
-
-    implicit val ec = ExecutionContext.global
-
-    val repository = new Repository()
-    val service = new ServiceImpl(repository)
-
-    List.range(1, 10).foreach(index =>
-      invokeWithTime(s"static query executed for $index time", () => service.getOrganizationsForThingsStatic)
-    )
-    List.range(1, 10).foreach(index =>
-      invokeWithTime(s"dynamic query executed for $index time", () => service.getOrganizationsForThingsDynamic)
-    )
-  }
+  def run(args: List[String]): IO[ExitCode] =
+    ServiceImpl.create.use(service => IO {
+      List.range(1, 10).foreach(index =>
+        invokeWithTime(s"static query executed for $index time", () => service.getOrganizationsForThingsStatic)
+      )
+      List.range(1, 10).foreach(index =>
+        invokeWithTime(s"dynamic query executed for $index time", () => service.getOrganizationsForThingsDynamic)
+      )
+    }).as(ExitCode.Success)
 
   private def invokeWithTime(name: String, callback: () => Any): Unit = {
     val start = new Date().getTime
