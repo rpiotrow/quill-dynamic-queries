@@ -12,5 +12,10 @@ lazy val root = (project in file("."))
   .settings(
     name := "quill-dynamic-queries",
     description := "Check dynamic queries in quill and doobie",
-    libraryDependencies ++= quill
+    libraryDependencies ++= quill,
+    dependencyOverrides ++= Seq(
+      "io.getquill"              %% "quill-core"                  % Versions.quillV,
+      "io.getquill"              %% "quill-jdbc"                  % Versions.quillV,
+      "io.getquill"              %% "quill-sql"                   % Versions.quillV
+    )
   )

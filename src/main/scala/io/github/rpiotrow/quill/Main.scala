@@ -14,7 +14,7 @@ object Main extends cats.effect.IOApp {
       List.range(1, 10).foreach(index =>
         invokeWithTime(s"dynamic query executed for $index time", () => service.getOrganizationsForThingsDynamic)
       )
-    }).as(ExitCode.Success)
+    }).map(_ => ExitCode.Success)
 
   private def invokeWithTime(name: String, callback: () => Any): Unit = {
     val start = new Date().getTime

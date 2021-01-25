@@ -2,7 +2,8 @@ import sbt._
 
 object Dependencies {
   object Versions {
-    val doobieV            = "0.9.4"
+    val doobieV            = "0.10.0"
+    val quillV             = "3.6.0"
   }
 
   lazy val quill = Seq(
